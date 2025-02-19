@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.tencent.tsf</groupId>
+    <artifactId>atom-parent</artifactId>
+    <version>1.1.1-RELEASE</version>
+  </parent>
+  <groupId>com.tencent.tsf</groupId>
+  <artifactId>atom-config</artifactId>
+  <version>1.1.1-RELEASE</version>
+  <description>The config of Atom</description>
+  <dependencies>
+    <dependency>
+      <groupId>com.tencent.tsf</groupId>
+      <artifactId>atom-common</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifestEntries>
+              <Implementation-Version>${project.version}</Implementation-Version>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
