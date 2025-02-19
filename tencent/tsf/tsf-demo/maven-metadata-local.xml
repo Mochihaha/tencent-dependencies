@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.tencent.tsf</groupId>
+  <artifactId>tsf-demo</artifactId>
+  <versioning>
+    <release>1.29.4-Finchley-RELEASE</release>
+    <versions>
+      <version>1.29.4-Finchley-RELEASE</version>
+    </versions>
+    <lastUpdated>20250217041540</lastUpdated>
+  </versioning>
+</metadata>

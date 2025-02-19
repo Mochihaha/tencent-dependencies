@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.tencent.tsf</groupId>
+		<artifactId>spring-cloud-tsf-dependencies</artifactId>
+		<version>1.29.4-Finchley-RELEASE</version>
+		<relativePath>./spring-cloud-tsf-dependencies</relativePath>
+	</parent>
+
+	<artifactId>spring-cloud-tsf-parent</artifactId>
+
+	<packaging>pom</packaging>
+	<name>Spring Cloud TSF Parent</name>
+	<description>Spring Cloud TSF</description>
+
+	<modules>
+		<module>spring-cloud-tsf-encrypt</module>
+		<module>spring-cloud-tsf-core</module>
+		<module>spring-cloud-tsf-consul-config</module>
+		<module>spring-cloud-tsf-consul-core</module>
+		<module>spring-cloud-tsf-consul-discovery</module>
+		<!-- 暂不启用
+		<module>spring-cloud-tsf-metrics</module>
+		 -->
+		<module>spring-cloud-tsf-unit</module>
+		<module>spring-cloud-tsf-auth</module>
+		<module>spring-cloud-tsf-sleuth</module>
+		<!-- 一直没有实现，不启用
+		<module>spring-cloud-tsf-rpc</module>
+		-->
+		<module>spring-cloud-tsf-starter</module>
+		<module>spring-cloud-tsf-route</module>
+		<!-- 任务调度SDK独立，从 tsf 去除
+		<module>spring-cloud-tsf-schedule</module>
+		-->
+		<module>spring-cloud-tsf-circuitbreaker</module>
+		<module>spring-cloud-tsf-fault-tolerance</module>
+		<module>spring-cloud-tsf-ratelimit</module>
+		<module>spring-cloud-tsf-starter-build</module>
+		<module>spring-cloud-tsf-encrypt-util</module>
+		<module>spring-cloud-tsf-logger</module>
+		<module>spring-cloud-tsf-swagger</module>
+		<module>spring-cloud-tsf-tagengine</module>
+		<module>spring-cloud-tsf-lane</module>
+		<module>spring-cloud-tsf-msgw-core</module>
+		<module>spring-cloud-tsf-msgw-zuul</module>
+		<module>spring-cloud-tsf-msgw-scg</module>
+		<module>jacoco-aggregate</module>
+		<module>spring-cloud-tsf-launcher</module>
+	</modules>
+
+	<properties>
+		<!-- Configurations -->
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- test dependencies -->
+		<junit.version>4.12</junit.version>
+		<powermock.version>2.0.2</powermock.version>
+		<mockito-core.version>2.23.4</mockito-core.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-module-junit4</artifactId>
+				<version>${powermock.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.powermock</groupId>
+				<artifactId>powermock-api-mockito2</artifactId>
+				<version>${powermock.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito-core.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<id>pre-test</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Dependency-Check is a Software Composition Analysis (SCA) tool -->
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>5.3.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<!-- 此处用聚合模式，方便总览的同时也可以按单个模块查看 -->
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- 通过 -Ddependency-check.skip=false 开启-->
+					<!-- more configuration see https://jeremylong.github.io/DependencyCheck/dependency-check-maven/configuration.html -->
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

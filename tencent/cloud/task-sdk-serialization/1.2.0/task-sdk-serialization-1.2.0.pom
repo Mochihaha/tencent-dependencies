@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.tencent.cloud</groupId>
+        <artifactId>task-sdk</artifactId>
+        <version>1.2.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>task-sdk-serialization</artifactId>
+    <description>The Serialization Module of Tencent Distribute Task Sdk Project</description>
+    <name>Task-SDK-Serialization</name>
+
+    <properties>
+    </properties>
+    <modules>
+        <module>task-sdk-serialization-api</module>
+        <module>task-sdk-serialization-json</module>
+        <module>task-sdk-serialization-protobuf</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.9.9</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.9.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.9.10</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

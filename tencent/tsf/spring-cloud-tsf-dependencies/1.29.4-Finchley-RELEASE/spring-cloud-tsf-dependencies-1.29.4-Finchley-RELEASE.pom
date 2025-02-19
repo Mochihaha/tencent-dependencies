@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.9.RELEASE</version>
+	</parent>
+
+	<groupId>com.tencent.tsf</groupId>
+	<artifactId>spring-cloud-tsf-dependencies</artifactId>
+	<version>1.29.4-Finchley-RELEASE</version>
+
+	<packaging>pom</packaging>
+	<name>Spring Cloud TSF Dependencies</name>
+	<description>TSF SDK dependencies for spring cloud.</description>
+
+	<properties>
+		<!-- TSF SDK统一版本 -->
+		<tsf.version>1.29.4-Finchley-RELEASE</tsf.version>
+		<!-- 时序数据库 -->
+		<influxdb-java.version>2.15</influxdb-java.version>
+		<gson.verion>2.8.2</gson.verion>
+		<consul-api.version>1.4.2</consul-api.version>
+		<!-- 修复Tomcat AJP漏洞版本 -->
+		<tomcat-embed.version>8.5.56</tomcat-embed.version>
+		<powermock.version>1.6.5</powermock.version>
+        <!-- 修复Spring Framework反射型文件下载漏洞 -->
+        <spring.version>5.0.19.RELEASE</spring.version>
+
+        <!-- 统一第三方组件版本号  -->
+		<commons-beanutils.version>1.9.4</commons-beanutils.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
+		<commons-io.version>2.6</commons-io.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+
+		<doxia-logging-api.version>1.1.2</doxia-logging-api.version>
+		<doxia-sink-api.version>1.1.2</doxia-sink-api.version>
+		<wagon-provider-api.version>1.0-beta-6</wagon-provider-api.version>
+		<plexus-container-default.version>1.0-alpha-30</plexus-container-default.version>
+		<plexus-utils.version>3.0.22</plexus-utils.version>
+		<HdrHistogram.version>2.1.10</HdrHistogram.version>
+		<xercesImpl.version>2.11.0</xercesImpl.version>
+		<jsr305.version>3.0.2</jsr305.version>
+		<guava.version>28.0-jre</guava.version>
+		<zipkin-reporter.version>2.7.13</zipkin-reporter.version>
+		<zipkin.version>2.11.10</zipkin.version>
+		<bcpkix-jdk15on.version>1.60</bcpkix-jdk15on.version>
+		<objenesis.version>3.0.1</objenesis.version>
+        <jackson-databind.version>2.9.10.5</jackson-databind.version>
+
+		<maven-artifact.version>2.2.1</maven-artifact.version>
+		<maven-artifact-manager.version>2.2.1</maven-artifact-manager.version>
+		<maven-plugin-api.version>2.2.1</maven-plugin-api.version>
+		<maven-project.version>2.2.1</maven-project.version>
+		<maven-reporting-api.version>3.0</maven-reporting-api.version>
+
+        <mockito-core.version>2.15.0</mockito-core.version>
+
+		<javassist.version>3.20.0-GA</javassist.version>
+		<animal-sniffer-annotations.version>1.17</animal-sniffer-annotations.version>
+		<kryo.version>4.0.1</kryo.version>
+		<vavr.version>0.10.0</vavr.version>
+		<brave-context-slf4j.version>5.4.3</brave-context-slf4j.version>
+		<brave.version>5.4.3</brave.version>
+		<resilience4j-core.version>1.1.0</resilience4j-core.version>
+		<error_prone_annotations.version>2.3.2</error_prone_annotations.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring Cloud 标准依赖 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Finchley.SR2</version>
+				<type>pom</type>
+				<scope>import</scope>
+				<!-- 移除TSF进行调整的Consul相关依赖，使用TSF的SDK -->
+				<exclusions>
+					<!-- Consul Config -->
+					<exclusion>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-consul-config</artifactId>
+					</exclusion>
+					<!-- Consul Core -->
+					<exclusion>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-consul-core</artifactId>
+					</exclusion>
+					<!-- Consul Discovery -->
+					<exclusion>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-consul-discovery</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- InfluxDB Client -->
+			<dependency>
+				<groupId>org.influxdb</groupId>
+				<artifactId>influxdb-java</artifactId>
+				<version>${influxdb-java.version}</version>
+			</dependency>
+			<!-- TSF Consul Config -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-consul-config</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Consul Core -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-consul-core</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Discovery -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-consul-discovery</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Unit 单元化功能 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-unit</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Sleuth 调用链 标准依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-sleuth</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Auth 权限管理 标准依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-auth</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Rate Limit 权限管理 标准依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-ratelimit</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Ribbon 客户端路由 标准依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-route</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Core 核心 标准依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-core</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Encrypt 加解密依赖 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-encrypt</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Logger 日志 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-logger</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF swagger -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-swagger</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Tag Engine -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-tagengine</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Starter 启动器 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-starter</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Encrypt -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-encrypt-util</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<!-- TSF Starter Build 启动器构建程序 -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-starter-build</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+
+			<!-- TSF Gateway Core -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-msgw-core</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+
+			<!-- TSF Gateway Zuul -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-msgw-zuul</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+
+			<!-- TSF Gateway SCG -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-msgw-scg</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.ecwid.consul</groupId>
+				<artifactId>consul-api</artifactId>
+				<version>${consul-api.version}</version>
+			</dependency>
+			<!-- TSF circuitbreaker -->
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-circuitbreaker</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-fault-tolerance</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.tencent.tsf</groupId>
+				<artifactId>spring-cloud-tsf-lane</artifactId>
+				<version>${tsf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${gson.version}</version>
+			</dependency>
+			<!-- 升级TOMCAT到8.5.51版本 -->
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-core</artifactId>
+				<version>${tomcat-embed.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-el</artifactId>
+				<version>${tomcat-embed.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat.embed</groupId>
+				<artifactId>tomcat-embed-websocket</artifactId>
+				<version>${tomcat-embed.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-databind.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>${spring.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons-beanutils.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons-collections.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-artifact</artifactId>
+				<version>${maven-artifact.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-artifact-manager</artifactId>
+				<version>${maven-artifact-manager.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-api</artifactId>
+				<version>${maven-plugin-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-project</artifactId>
+				<version>${maven-project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.doxia</groupId>
+				<artifactId>doxia-logging-api</artifactId>
+				<version>${doxia-logging-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.doxia</groupId>
+				<artifactId>doxia-sink-api</artifactId>
+				<version>${doxia-sink-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.reporting</groupId>
+				<artifactId>maven-reporting-api</artifactId>
+				<version>${maven-reporting-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-provider-api</artifactId>
+				<version>${wagon-provider-api.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-container-default</artifactId>
+				<version>${plexus-container-default.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-utils</artifactId>
+				<version>${plexus-utils.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hdrhistogram</groupId>
+				<artifactId>HdrHistogram</artifactId>
+				<version>${HdrHistogram.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>${xercesImpl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.code.findbugs</groupId>
+				<artifactId>jsr305</artifactId>
+				<version>${jsr305.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.zipkin.reporter2</groupId>
+				<artifactId>zipkin-reporter</artifactId>
+				<version>${zipkin-reporter.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.zipkin.zipkin2</groupId>
+				<artifactId>zipkin</artifactId>
+				<version>${zipkin.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.bouncycastle</groupId>
+				<artifactId>bcpkix-jdk15on</artifactId>
+				<version>${bcpkix-jdk15on.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.objenesis</groupId>
+				<artifactId>objenesis</artifactId>
+				<version>${objenesis.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>${javassist.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>animal-sniffer-annotations</artifactId>
+				<version>${animal-sniffer-annotations.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave-context-slf4j</artifactId>
+				<version>${brave-context-slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.zipkin.brave</groupId>
+				<artifactId>brave</artifactId>
+				<version>${brave.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.vavr</groupId>
+				<artifactId>vavr</artifactId>
+				<version>${vavr.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.github.resilience4j</groupId>
+				<artifactId>resilience4j-core</artifactId>
+				<version>${resilience4j-core.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.esotericsoftware</groupId>
+				<artifactId>kryo</artifactId>
+				<version>${kryo.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.google.errorprone</groupId>
+				<artifactId>error_prone_annotations</artifactId>
+				<version>${error_prone_annotations.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+</project>
